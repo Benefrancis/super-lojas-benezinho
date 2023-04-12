@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-
+@Data
 @Entity
 @ToString
 @RequiredArgsConstructor
@@ -30,15 +30,15 @@ public class Produto {
     private
     String nome;
 
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "ID_PEDIDO", referencedColumnName = "ID_PEDIDO", foreignKey = @ForeignKey(name = "FK_PROD_PEDIDO", value = ConstraintMode.CONSTRAINT))
-    private Pedido pedido;
+//    @Getter
+//    @Setter
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinColumn(name = "ID_PEDIDO", referencedColumnName = "ID_PEDIDO", foreignKey = @ForeignKey(name = "FK_PROD_PEDIDO", value = ConstraintMode.CONSTRAINT))
+//    private Pedido pedido;
 
 
     @Getter
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "TB_PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "ID_PRODUTO", foreignKey = @ForeignKey(name = "FK_PRODUTO", value = ConstraintMode.CONSTRAINT)),
             inverseJoinColumns = @JoinColumn(name = "ID_CATEGORIA", foreignKey = @ForeignKey(name = "FK_CATEGORIA", value = ConstraintMode.CONSTRAINT))
@@ -48,16 +48,26 @@ public class Produto {
 
     public Produto addCategoria(Categoria c) {
         this.getCategorias().add(c);
-        c.getProdutos().add(this);
+        //  c.getProdutos().add(this);
         return this;
     }
 
     public Produto removeCategoria(Categoria c) {
         this.getCategorias().remove(c);
-        c.getProdutos().remove(this);
+        //   c.getProdutos().remove(this);
         return this;
     }
 
     public Produto() {
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                //   ", pedido=" + pedido +
+                ", categorias=" + categorias +
+                '}';
     }
 }

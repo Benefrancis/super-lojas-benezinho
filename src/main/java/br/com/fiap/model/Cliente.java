@@ -24,7 +24,16 @@ public class Cliente {
     @Column(name = "EMAIL_CLIENTE")
     String email;
 
-    @OneToMany(mappedBy = "cliente")
-    Set<Pedido> pedidos = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "cliente", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    Set<Pedido> pedidos = new LinkedHashSet<>();
 
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                // ", pedidos=" + pedidos +
+                '}';
+    }
 }

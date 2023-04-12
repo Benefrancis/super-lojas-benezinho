@@ -22,9 +22,16 @@ public class Categoria {
     @Column(name = "NM_CATEGORIA")
     private String nome;
 
-    @ManyToMany(mappedBy = "categorias")
-    @OrderBy("nome asc")
-    private Set<Produto> produtos = new LinkedHashSet<>();
+//    @ManyToMany(mappedBy = "categorias", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @OrderBy("nome asc")
+//    private Set<Produto> produtos = new LinkedHashSet<>();
 
-
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+             //   ", produtos=" + produtos +
+                '}';
+    }
 }
