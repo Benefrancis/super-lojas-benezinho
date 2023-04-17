@@ -1,9 +1,9 @@
 package br.com.fiap;
 
-import br.com.fiap.model.Categoria;
-import br.com.fiap.model.Cliente;
-import br.com.fiap.model.Pedido;
-import br.com.fiap.model.Produto;
+import br.com.fiap.produto.model.Categoria;
+import br.com.fiap.cliente.model.Cliente;
+import br.com.fiap.pedido.model.Pedido;
+import br.com.fiap.produto.model.Produto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

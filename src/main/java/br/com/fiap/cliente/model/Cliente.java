@@ -1,4 +1,4 @@
-package br.com.fiap.model;
+package br.com.fiap.cliente.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

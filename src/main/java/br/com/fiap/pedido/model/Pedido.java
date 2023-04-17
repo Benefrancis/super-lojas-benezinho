@@ -1,5 +1,7 @@
-package br.com.fiap.model;
+package br.com.fiap.pedido.model;
 
+import br.com.fiap.cliente.model.Cliente;
+import br.com.fiap.produto.model.Produto;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,8 +19,7 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_PEDIDO")
     @SequenceGenerator(name = "SQ_PEDIDO", sequenceName = "SQ_PEDIDO")
     @Column(name = "ID_PEDIDO")
-    private
-    long id;
+    private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DT_PEDIDO")
