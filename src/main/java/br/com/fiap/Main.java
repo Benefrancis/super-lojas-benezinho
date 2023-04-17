@@ -39,13 +39,14 @@ public class Main {
         manager.getTransaction().begin();
         Arrays.asList(gabriel, prof, ricardo, gabriel2).forEach(manager::persist);
         salvaUnidades(manager);
-        manager.getTransaction().commit();
-
         gabriel.addUnidade(manager.find(Unidade.class, 1));
         gabriel.addUnidade(manager.find(Unidade.class, 2));
         prof.addUnidade(manager.find(Unidade.class, 1));
         ricardo.addUnidade(manager.find(Unidade.class, 1));
         gabriel2.addUnidade(manager.find(Unidade.class, 1));
+        manager.getTransaction().commit();
+
+
 
 
         manager.createQuery("FROM Unidade").getResultList().forEach(System.out::println);
