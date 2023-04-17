@@ -13,10 +13,11 @@ import java.time.LocalDateTime;
 public class Main {
     public static void main(String[] args) {
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("fiap");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("maria-db");
         EntityManager manager = factory.createEntityManager();
 
-     //   salvar(manager);
+        salvar(manager);
+
 
         var pedido = findPedidoByid(1L, manager);
 
