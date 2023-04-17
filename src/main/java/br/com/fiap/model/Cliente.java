@@ -12,7 +12,6 @@ import java.util.Set;
         @UniqueConstraint(name = "UK_EMAIL_CLIENTE", columnNames = "EMAIL_CLIENTE")
 })
 public class Cliente {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_CLIENTE")
     @SequenceGenerator(name = "SQ_CLIENTE", sequenceName = "SQ_CLIENTE")
@@ -25,19 +24,16 @@ public class Cliente {
     @Column(name = "EMAIL_CLIENTE")
     String email;
 
-    @OneToMany(mappedBy = "cliente")
-    Set<Pedido> pedidos = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "cliente", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    Set<Pedido> pedidos = new LinkedHashSet<>();
 
-    public Cliente addPedido(Pedido p) {
-        this.getPedidos().add(p);
-        p.setCliente(this);
-        return this;
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                // ", pedidos=" + pedidos +
+                '}';
     }
-
-    public Cliente removePedido(Pedido p) {
-        this.getPedidos().remove(p);
-        p.setCliente(null);
-        return this;
-    }
-
 }

@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+
 @Data
 @Entity
 @Table(name = "TB_PEDIDO")
-@NamedEntityGraph(name = "Pedido.produtos", attributeNodes = @NamedAttributeNode("produtos"))
 public class Pedido {
 
     @Id
@@ -26,25 +26,36 @@ public class Pedido {
     LocalDateTime data;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE", 
-            foreignKey = @ForeignKey(name = "FK_PEDIDO_CLIENTE", value = ConstraintMode.CONSTRAINT))
+    @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE", foreignKey = @ForeignKey(name = "FK_PEDIDO_CLIENTE", value = ConstraintMode.CONSTRAINT))
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "pedido")
-    @OrderBy("nome asc")
+
+   @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+   @JoinTable(name = "TB_PROD_PEDIDO",
+           foreignKey = @ForeignKey(name = "FK_PEDIDO_PROD" , value = ConstraintMode.CONSTRAINT))
     private Set<Produto> produtos = new LinkedHashSet<>();
 
 
     public Pedido addProduto(Produto p) {
         this.getProdutos().add(p);
-        p.setPedido(this);
+        // p.setPedido(this);
         return this;
     }
 
     public Pedido removeProduto(Produto p) {
         this.getProdutos().remove(p);
-        p.setPedido(null);
+       // p.setPedido(null);
         return this;
     }
 
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", data=" + data +
+                ", cliente=" + cliente +
+                ", produtos=" + produtos +
+                '}';
+    }
 }
