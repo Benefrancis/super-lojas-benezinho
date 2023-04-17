@@ -1,5 +1,6 @@
 package br.com.fiap;
 
+import br.com.fiap.funcionario.model.Funcionario;
 import br.com.fiap.model.Categoria;
 import br.com.fiap.model.Cliente;
 import br.com.fiap.model.Pedido;
