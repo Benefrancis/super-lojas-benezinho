@@ -1,5 +1,6 @@
 package br.com.fiap.unidade.model;
 
+import br.com.fiap.funcionario.model.Funcionario;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,5 +25,14 @@ public class Unidade {
             foreignKey = @ForeignKey(name = "FK_UNIDADE_SEDE", value = ConstraintMode.CONSTRAINT)
     )
     private Unidade sede;
+
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "ID_FUNCIONARIO_CHEFE",
+            referencedColumnName = "ID_FUNCIONARIO",
+            foreignKey = @ForeignKey(name = "FK_CHEFE_UNIDADE", value = ConstraintMode.CONSTRAINT)
+    )
+    private Funcionario chefe;
 
 }
