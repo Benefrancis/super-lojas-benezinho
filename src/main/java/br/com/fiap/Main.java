@@ -23,7 +23,7 @@ public class Main {
         System.out.println(pedido.getId());
         System.out.println(pedido.getData());
         System.out.println(pedido.getCliente());
-        
+
         System.out.println(pedido.getProdutos());
 
     }

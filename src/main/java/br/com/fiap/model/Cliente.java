@@ -12,6 +12,7 @@ import java.util.Set;
         @UniqueConstraint(name = "UK_EMAIL_CLIENTE", columnNames = "EMAIL_CLIENTE")
 })
 public class Cliente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_CLIENTE")
     @SequenceGenerator(name = "SQ_CLIENTE", sequenceName = "SQ_CLIENTE")
@@ -26,5 +27,17 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente")
     Set<Pedido> pedidos = new LinkedHashSet<>();
+
+    public Cliente addPedido(Pedido p) {
+        this.getPedidos().add(p);
+        p.setCliente(this);
+        return this;
+    }
+
+    public Cliente removePedido(Pedido p) {
+        this.getPedidos().remove(p);
+        p.setCliente(null);
+        return this;
+    }
 
 }
