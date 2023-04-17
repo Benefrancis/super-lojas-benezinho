@@ -38,13 +38,11 @@ public class Pedido {
 
     public Pedido addProduto(Produto p) {
         this.getProdutos().add(p);
-        // p.setPedido(this);
         return this;
     }
 
     public Pedido removeProduto(Produto p) {
         this.getProdutos().remove(p);
-       // p.setPedido(null);
         return this;
     }
 

@@ -18,9 +18,7 @@ public class Main {
 
         salvar(manager);
 
-
         var pedido = findPedidoByid(1L, manager);
-
 
         System.out.println(pedido);
 
