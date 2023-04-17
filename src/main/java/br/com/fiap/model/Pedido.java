@@ -30,21 +30,19 @@ public class Pedido {
     private Cliente cliente;
 
 
-   @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-   @JoinTable(name = "TB_PROD_PEDIDO",
-           foreignKey = @ForeignKey(name = "FK_PEDIDO_PROD" , value = ConstraintMode.CONSTRAINT))
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "TB_PROD_PEDIDO",
+            foreignKey = @ForeignKey(name = "FK_PEDIDO_PROD", value = ConstraintMode.CONSTRAINT))
     private Set<Produto> produtos = new LinkedHashSet<>();
 
 
     public Pedido addProduto(Produto p) {
         this.getProdutos().add(p);
-        // p.setPedido(this);
         return this;
     }
 
     public Pedido removeProduto(Produto p) {
         this.getProdutos().remove(p);
-       // p.setPedido(null);
         return this;
     }
 

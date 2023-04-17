@@ -3,9 +3,6 @@ package br.com.fiap.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 @Data
 @Entity
 @Table(name = "TB_CATEGORIA", uniqueConstraints = {
@@ -22,16 +19,11 @@ public class Categoria {
     @Column(name = "NM_CATEGORIA")
     private String nome;
 
-//    @ManyToMany(mappedBy = "categorias", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @OrderBy("nome asc")
-//    private Set<Produto> produtos = new LinkedHashSet<>();
-
     @Override
     public String toString() {
         return "Categoria{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-             //   ", produtos=" + produtos +
                 '}';
     }
 }
