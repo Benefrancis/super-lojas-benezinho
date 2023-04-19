@@ -1,8 +1,12 @@
 package br.com.fiap.funcionario.model;
 
+import br.com.fiap.pessoa.model.PF;
 import br.com.fiap.unidade.model.Unidade;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -22,6 +26,18 @@ public class Funcionario {
     @SequenceGenerator(name = "SQ_FUNCIONARIO", sequenceName = "SQ_FUNCIONARIO", initialValue = 1)
     @Column(name = "ID_FUNCIONARIO")
     Long id;
+
+
+    @Getter
+    @Setter
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "ID_PESSOA",
+            referencedColumnName = "ID_PESSOA",
+            foreignKey = @ForeignKey(name = "FK_FUNC_PESSOA", value = ConstraintMode.CONSTRAINT)
+    )
+    private PF pessoa;
+
 
     @Getter
     @Setter
@@ -59,6 +75,7 @@ public class Funcionario {
         final StringBuilder sb = new StringBuilder("Funcionario{");
         sb.append("id=").append(id);
         sb.append(", matricula='").append(matricula).append('\'');
+        sb.append(", pessoa=").append(pessoa);
         sb.append('}');
         return sb.toString();
     }

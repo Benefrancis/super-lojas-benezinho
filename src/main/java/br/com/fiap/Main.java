@@ -5,11 +5,13 @@ import br.com.fiap.model.Categoria;
 import br.com.fiap.model.Cliente;
 import br.com.fiap.model.Pedido;
 import br.com.fiap.model.Produto;
+import br.com.fiap.pessoa.model.PF;
 import br.com.fiap.unidade.model.Unidade;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -23,8 +25,14 @@ public class Main {
 //        var pedido = findPedidoByid(1L, manager);
 //        System.out.println(pedido);
 
+        PF bene = new PF();
+        bene.setCPF("132134654654");
+        bene.setNascimento(LocalDate.of(1977,3,8));
+        bene.setNome("Benefrancis do Nascimento");
+
         Funcionario prof = new Funcionario();
         prof.setMatricula("21773");
+        prof.setPessoa(bene);
 
         Funcionario gabriel = new Funcionario();
         gabriel.setMatricula("123456789");
@@ -49,7 +57,7 @@ public class Main {
 
 
 
-        manager.createQuery("FROM Unidade").getResultList().forEach(System.out::println);
+        manager.createQuery("FROM Funcionario").getResultList().forEach(System.out::println);
 
         manager.close();
         factory.close();
