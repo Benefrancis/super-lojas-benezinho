@@ -1,5 +1,6 @@
 package br.com.fiap.funcionario.model;
 
+import br.com.fiap.pessoa.model.PF;
 import br.com.fiap.unidade.model.Unidade;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,6 +28,17 @@ public class Funcionario {
     @Setter
     @Column(name = "NR_MATRICULA")
     String matricula;
+
+    @Getter
+    @Setter
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "ID_PESSOA",
+            referencedColumnName = "ID_PESSOA",
+            foreignKey = @ForeignKey(name = "FK_FUNC_PESSOA", value = ConstraintMode.CONSTRAINT)
+    )
+    private PF pessoa;
+
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
@@ -59,6 +71,7 @@ public class Funcionario {
         final StringBuilder sb = new StringBuilder("Funcionario{");
         sb.append("id=").append(id);
         sb.append(", matricula='").append(matricula).append('\'');
+        sb.append(", pessoa='").append(pessoa).append('\'');
         sb.append('}');
         return sb.toString();
     }
